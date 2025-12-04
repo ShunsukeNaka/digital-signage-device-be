@@ -12,6 +12,7 @@ from datetime import datetime, timezone, timedelta
 from sqlalchemy import or_
 from io import BytesIO
 import imageio
+import logging
 from models import db
 from models.user import User
 from models.device import Device

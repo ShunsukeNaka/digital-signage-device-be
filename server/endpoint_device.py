@@ -67,6 +67,7 @@ def device_content_get_device():
         }), 200
 
     except Exception as e:
+        bp.logger.info(e)
         return jsonify({
             "status": "error",
             "responded_at": get_now_str(),

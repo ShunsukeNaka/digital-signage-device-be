@@ -48,6 +48,7 @@ def login_device():
                 "token": send_token
             }), 200
     except Exception as e:
+        print(e)
         return jsonify({
             "status": "error", "responded_at": get_now_str(),
             "message": 'Message is can`t showing'

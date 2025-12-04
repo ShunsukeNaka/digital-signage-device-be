@@ -4,6 +4,7 @@ from flask_restx import Resource, Api
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timezone, timedelta
+import logging
 from sqlalchemy import or_
 from models import db
 from models.user import User
@@ -26,6 +27,17 @@ flask_app.config.from_object('config')  # config.pyを読み込み
 db.init_app(flask_app)
 # CORS有効化
 CORS(flask_app)
+
+file_handler = logging.FileHandler("/var/be/fukunage-device/logs/app.log", encoding="utf-8")
+file_handler.setLevel(logging.INFO)
+
+formatter = logging.Formatter(
+    "%(asctime)s - %(levelname)s - %(message)s"
+)
+file_handler.setFormatter(formatter)
+
+flask_app.logger.addHandler(file_handler)
+flask_app.logger.setLevel(logging.INFO)
 
 # WSGI互換用
 application = flask_app
